@@ -1,5 +1,5 @@
 export interface Target {
-    id: number;
+    id?: number;
     name: string;
     description: string;
     status: string;
@@ -8,7 +8,8 @@ export interface Target {
 }
 
 export interface Contact {
-    id: number;
+    id?: number;
+    businessLeadId: number;
     personalName: string;
     familyName: string;
     middleName: string;
@@ -19,8 +20,8 @@ export interface Contact {
 
 export interface Financial
 {
-    id: number;
-    leadId: number;
+    id?: number;
+    businessLeadId: number;
     eventDate: Date;
     currencyValue: number;
 }

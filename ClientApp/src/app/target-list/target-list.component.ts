@@ -12,12 +12,24 @@ export class TargetListComponent {
     public loadError: string;
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Target[]>(baseUrl + 'api/BusinessLead/LeadList').subscribe(result => {
-      this.targets = result;
+    http.get<Target[]>(baseUrl + 'api/BusinessLead/GetAll').subscribe(result => {
+        this.targets = result;
+        console.log(result);
     }, error => {
       this.targets = [];
       this.loadError = error.message;
       console.error(error)
     });
   }
+
+    public createNewTarget()
+    {
+        this.targets.push({ 
+            name: "",
+            description: "",
+            status: "",
+            primaryContacts: [],
+            financialData: []
+        });
+    }
 }

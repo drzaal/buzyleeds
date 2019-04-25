@@ -1,0 +1,24 @@
+<div *ngIf="!editMode" class="row">
+    <div class="col-sm-8">
+      <div>{{ financial.eventDate }}</div>
+      <div>{{ target.currencyValue }}</div>
+    </div>
+    <div class="col-xs-6 col-sm-2 align-self-center">
+      <button (click)="toggleEdit()" class="btn btn-sm btn-block btn-success">Edit</button>
+    </div>
+    <div class="col-xs-6 col-sm-2 align-self-center">
+      <button (click)="deleteTarget()" class="btn btn-sm btn-block btn-danger">Delete</button>
+    </div>
+</div>
+
+<form *ngIf="editMode">
+  <input name="id" type="hidden" [(ngModel)]="financial.id" />
+  <input name="leadId" type="hidden" [(ngModel)]="financial.leadId" />
+  <label for="eventDate" class="col-sm-3">Date</label>
+  <input name="eventDate" class="col-sm-9" type="text" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="financial.eventDate" />
+  <label for="currencyValue" class="col-sm-3">Currency Value</label>
+  <input name="currencyValue" class="col-sm-9" type="text" [(ngModel)]="target.currencyValue" />
+  <label>Contacts</label>
+
+  <button (click)="saveTarget()">Save</button>
+</form>

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using nixiang.dbo;
+using buzyleeds.dbo;
 
-namespace nixiang.Migrations
+namespace buzyleeds.Migrations
 {
     [DbContext(typeof(TargetContext))]
     [Migration("20190523165212_initial")]
@@ -19,7 +19,7 @@ namespace nixiang.Migrations
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("nixiang.dbo.BusinessLead", b =>
+            modelBuilder.Entity("buzyleeds.dbo.BusinessLead", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -35,7 +35,7 @@ namespace nixiang.Migrations
                     b.ToTable("BusinessLeads");
                 });
 
-            modelBuilder.Entity("nixiang.dbo.Financial", b =>
+            modelBuilder.Entity("buzyleeds.dbo.Financial", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -49,7 +49,7 @@ namespace nixiang.Migrations
                     b.ToTable("Financials");
                 });
 
-            modelBuilder.Entity("nixiang.dbo.TargetContact", b =>
+            modelBuilder.Entity("buzyleeds.dbo.TargetContact", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -75,16 +75,16 @@ namespace nixiang.Migrations
                     b.ToTable("TargetContacts");
                 });
 
-            modelBuilder.Entity("nixiang.dbo.Financial", b =>
+            modelBuilder.Entity("buzyleeds.dbo.Financial", b =>
                 {
-                    b.HasOne("nixiang.dbo.BusinessLead")
+                    b.HasOne("buzyleeds.dbo.BusinessLead")
                         .WithMany("FinancialData")
                         .HasForeignKey("BusinessLeadId");
                 });
 
-            modelBuilder.Entity("nixiang.dbo.TargetContact", b =>
+            modelBuilder.Entity("buzyleeds.dbo.TargetContact", b =>
                 {
-                    b.HasOne("nixiang.dbo.BusinessLead")
+                    b.HasOne("buzyleeds.dbo.BusinessLead")
                         .WithMany("PrimaryContacts")
                         .HasForeignKey("BusinessLeadId");
                 });

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using nixiang.dbo;
+using buzyleeds.dbo;
+using Microsoft.EntityFrameworkCore;
 
-namespace nixiang.Controllers
+namespace buzyleeds.Controllers
 {
 
 
@@ -20,37 +21,38 @@ namespace nixiang.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<BusinessLead> LeadList()
+        public IEnumerable<BusinessLead> GetAll()
         {
-            return db.BusinessLeads.ToList();
+            return db.BusinessLeads.Include(x => x.PrimaryContacts)
+                .ToList();
         }
 
         [HttpGet("[action]")]
-        public BusinessLead LeadDetail(int id)
+        public int TotalCount()
+        {
+            return db.BusinessLeads.Count();
+        }
+
+        [HttpGet("[action]")]
+        public BusinessLead GetById(int id)
         {
             return db.BusinessLeads.Find(id);
         }
 
-        [HttpDelete("[action]")]
-        public void Delete(int id)
+        [HttpDelete("[action]/{id}")]
+        public void DeleteRecord(int id)
         {
             db.BusinessLeads.Remove(db.BusinessLeads.Find(id));
             db.SaveChanges();
         }
 
-        [HttpPut("[action]")]
-        public BusinessLead Create(BusinessLead leadData)
+        [HttpPost("[action]")]
+        public BusinessLead SaveRecord([FromBody] BusinessLead leadData)
         {
-            var leadRecord = db.BusinessLeads.Add(leadData);
+            if (leadData.Id == 0) leadData = db.BusinessLeads.Add(leadData).Entity;
+            else db.BusinessLeads.Update(leadData);
             db.SaveChanges();
 
-            return leadRecord.Entity;
-        }
-
-        [HttpPost("[action]")]
-        public BusinessLead Update(BusinessLead leadData)
-        {
-            db.BusinessLeads.Update(leadData);
             return leadData;
         }
     }

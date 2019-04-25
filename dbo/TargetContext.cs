@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace nixiang.dbo
+namespace buzyleeds.dbo
 {
     // Only use an enum if there are business rules associated with a status
     public enum TargetStatus { RESEARCHING, PENDING, APPROVED, DECLINED }
@@ -42,6 +42,8 @@ namespace nixiang.dbo
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [ForeignKey("BusinessLead")]
+        public int LeadId;
         public string PersonalName { get; set; }
         public string FamilyName { get; set; }
         public string MiddleName { get; set; }

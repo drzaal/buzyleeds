@@ -1,0 +1,20 @@
+
+<div *ngIf="!editMode">
+  <div>{{ contact.familyName }}, {{ contact.personalName }}</div>
+    <div>{{ contact.phone }}, {{ contact.email }}</div>
+</div>
+
+<form *ngIf="editMode" class="row">
+  <input name="id" type="hidden" [(ngModel)]="contact.id" />
+  <input name="businessLeadId" type="hidden" [(ngModel)]="contact.businessLeadId" />
+  <label for="familyName" class="col-sm-3">Family Name</label>
+  <input name="familyName" class="col-sm-9" type="text" [(ngModel)]="contact.familyName" />
+  <label for="personalName" class="col-sm-3">Personal Name</label>
+  <input name="personalName" class="col-sm-9" type="text" [(ngModel)]="contact.personalName" />
+  <label for="phone" class="col-sm-3">Phone Number</label>
+  <input name="phone" class="col-sm-9" type="text" [(ngModel)]="contact.phone" />
+  <label for="email" class="col-sm-3">Email</label>
+  <input name="email" class="col-sm-9" type="text" [(ngModel)]="contact.email" />
+
+  <button class="btn btn-save btn-block" (click)="saveTarget()">Save</button>
+</form>

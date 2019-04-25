@@ -1,19 +1,39 @@
-<h1>{{target.name}}</h1>
-
-<div *ngIf="!editMode">
-  <label>Business</label>
-  <input type="text" ng-bind="target.name">
-  <label>Description</label>
-  <input type="text" ng-bind="target.description">
-  <label>Contacts</label>
-  <button (click)="toggleEdit">Edit</button>
+<div *ngIf="!editMode" class="row">
+    <div class="col-sm-8 row">
+      <h3 class="col-12">{{ target.name }}</h3>
+      <div class="col-12">{{ target.description }}</div>
+      <h4 
+        [ngClass]="{ 'col-12':true, btn:true, 'btn-info': hideContacts}"
+        (click)="hideContacts=!hideContacts">
+        Contacts
+      </h4>
+      <div class="col-12" *ngIf="!hideContacts">
+        <button class="btn btn-info btn-block" (click)="createNewContact()">Add Contact</button>
+        <ng-container *ngFor="let c of target.primaryContacts; let i = index">
+          <app-contact-detail [contact]="c"
+            [refId]="i"
+            [deleteCallback]="removeContact" 
+            [editCallback]="openEditContact"
+            [focusCallback]="openEditContact">
+          </app-contact-detail>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-2 align-self-center">
+      <button (click)="toggleEdit()" class="btn btn-sm btn-block btn-success">Edit</button>
+    </div>
+    <div class="col-xs-6 col-sm-2 align-self-center">
+      <button (click)="deleteTarget()" class="btn btn-sm btn-block btn-danger">Delete</button>
+    </div>
 </div>
 
 <form *ngIf="editMode">
-  <input name="id" type="hidden" [(ngmodel)]="target.id" />
-  <label for="name">Business</label>
-  <input name="name" type="text" [(ngmodel)]="target.name" />
-  <label for="description">Description</label>
-  <input name ="description" type="text" [(ngmodel)]="target.description" />
-  <label>Contacts</label>
+    <input name="id" type="hidden" [(ngModel)]="target.id" />
+    <label for="name">Business</label>
+    <input name="name" type="text" [(ngModel)]="target.name" />
+    <label for="description">Description</label>
+    <input name="description" type="text" [(ngModel)]="target.description" />
+    <label>Contacts</label>
+
+    <button (click)="saveTarget()">Save</button>
 </form>
