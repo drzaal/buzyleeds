@@ -1,0 +1,19 @@
+<h1>{{target.name}}</h1>
+
+<div *ngIf="!editMode">
+  <label>Business</label>
+  <input type="text" ng-bind="target.name">
+  <label>Description</label>
+  <input type="text" ng-bind="target.description">
+  <label>Contacts</label>
+  <button (click)="toggleEdit">Edit</button>
+</div>
+
+<form *ngIf="editMode">
+  <input name="id" type="hidden" [(ngmodel)]="target.id" />
+  <label for="name">Business</label>
+  <input name="name" type="text" [(ngmodel)]="target.name" />
+  <label for="description">Description</label>
+  <input name ="description" type="text" [(ngmodel)]="target.description" />
+  <label>Contacts</label>
+</form>
