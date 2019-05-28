@@ -1,12 +1,13 @@
-<h1>Targets</h1>
+<h1>Contacts</h1>
 
-<p *ngIf="!targets"><em>Loading...</em></p>
+<p *ngIf="!contacts"><em>Loading...</em></p>
 <p *ngIf="loadError">{{loadError}}</p>
 
-<button (click)="createNewTarget()">Create a new Target</button>
-
-<ul class='table table-striped' *ngIf="targets">
-    <li *ngFor="let t of targets">
-        <app-target-detail [target]="t"></app-target-detail>
-    </li>
-</ul>
+<div *ngIf="contacts" >
+  <div class="row"*ngFor="let c of contacts; let i = index">
+    <app-contact-detail [contact]="c"
+                        [refId]="i"
+                        [refListContainer]="contacts">
+    </app-contact-detail>
+  </div>
+</div>

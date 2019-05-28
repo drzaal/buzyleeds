@@ -4,7 +4,6 @@ import { NgbButtonsModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstra
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-//import { MatDatepicker } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -13,6 +12,7 @@ import { CounterComponent } from './counter/counter.component';
 import { TargetListComponent } from './target-list/target-list.component';
 import { TargetDetailComponent } from './target-detail/target-detail.component';
 import { FinancialDetailComponent } from './financial-detail/financial-detail.component';
+import { ContactListComponent } from './contact-list/contact-list.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 
 @NgModule({
@@ -24,6 +24,7 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
     TargetListComponent,
     TargetDetailComponent,
     FinancialDetailComponent,
+    ContactListComponent,
     ContactDetailComponent
   ],
   imports: [
@@ -31,12 +32,12 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
     HttpClientModule,
     NgbButtonsModule,
     NgbDatepickerModule,
-    //MatDatepicker,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'target-list', component: TargetListComponent },
+      { path: 'contact-list', component: ContactListComponent },
     ])
   ],
   providers: [],

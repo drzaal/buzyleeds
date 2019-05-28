@@ -25,3 +25,11 @@ export interface Financial
     eventDate: Date;
     currencyValue: number;
 }
+
+export enum LeadStatus
+{
+    RESEARCHING,
+    PENDING_APPROVAL,
+    APPROVED,
+    DECLINED
+}

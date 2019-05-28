@@ -21,18 +21,4 @@ export class ContactListComponent {
       console.error(error)
     });
   }
-
-    public createNewContact()
-    {
-        console.log("creating a new Contact record");
-        this.contacts.push({ 
-            leadId: 0,
-            personalName: "",
-            familyName: "",
-            alias: "",
-            phone: "",
-            email: "",
-            middleName: ""
-        });
-    }
 }

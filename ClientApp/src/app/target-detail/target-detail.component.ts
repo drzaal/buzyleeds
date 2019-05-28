@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Target } from '../model';
+import { Target, LeadStatus } from '../model';
 import { updateClassProp } from '../../../node_modules/@angular/core/src/render3/styling';
 import { toDate } from '../../../node_modules/@angular/common/src/i18n/format_date';
 import { ContactDetailComponent } from '../contact-detail/contact-detail.component';
@@ -27,6 +27,13 @@ import { ContactDetailComponent } from '../contact-detail/contact-detail.compone
 
     public openContactId: number;
     public openFinancialId: number;
+
+    public targetStatusMap = {
+        "RESEARCHING": "Researching",
+        "PENDING_APPROVAL": "Pending Approval",
+        "APPROVED": "Approved",
+        "DECLINED": "Declined" 
+    }
 
     private httpClient: HttpClient;
     private apiUrl: string;

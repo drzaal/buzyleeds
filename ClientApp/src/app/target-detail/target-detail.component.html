@@ -1,22 +1,22 @@
 <div *ngIf="!editMode" class="row">
-    <div class="col-sm-8 row">
-      <h3 class="col-12">{{ target.name }}</h3>
-      <div class="col-12">{{ target.description }}</div>
-      <h4 
-        [ngClass]="{ 'col-12':true, btn:true, 'btn-info': hideContacts}"
+  <div class="col-sm-8 row">
+    <h3 class="col-12">{{ target.name }}</h3>
+    <div class="col-12">Status: {{ targetStatusMap[target.status] }}</div>
+    <div class="col-12">{{ target.description }}</div>
+    <h4 [ngClass]="{ 'col-12':true, btn:true, 'btn-info': hideContacts}"
         (click)="hideContacts=!hideContacts">
-        Contacts
-      </h4>
-      <div class="col-12" *ngIf="!hideContacts">
-        <button class="btn btn-info btn-block" (click)="createNewContact()">Add Contact</button>
-        <ng-container *ngFor="let c of target.primaryContacts; let i = index">
-          <app-contact-detail [contact]="c"
-            [refId]="i"
-            [refListContainer]="target.primaryContacts">
-          </app-contact-detail>
-        </ng-container>
-      </div>
+      Contacts
+    </h4>
+    <div class="col-12" *ngIf="!hideContacts">
+      <button class="btn btn-info btn-block" (click)="createNewContact()">Add Contact</button>
+      <ng-container *ngFor="let c of target.primaryContacts; let i = index">
+        <app-contact-detail [contact]="c"
+                            [refId]="i"
+                            [refListContainer]="target.primaryContacts">
+        </app-contact-detail>
+      </ng-container>
     </div>
+  </div>
     <div class="col-xs-6 col-sm-2 align-self-center">
       <button (click)="toggleEdit()" class="btn btn-sm btn-block btn-success">Edit</button>
     </div>
@@ -26,12 +26,17 @@
 </div>
 
 <form *ngIf="editMode">
-    <input name="id" type="hidden" [(ngModel)]="target.id" />
-    <label for="name">Business</label>
-    <input name="name" type="text" [(ngModel)]="target.name" />
-    <label for="description">Description</label>
-    <input name="description" type="text" [(ngModel)]="target.description" />
-    <label>Contacts</label>
+  <input name="id" type="hidden" [(ngModel)]="target.id" />
+  <label class="col-sm-3" for="name">Business</label>
+  <input class="col-sm-9" name="name" type="text" [(ngModel)]="target.name" />
+  <label class="col-sm-3" for="status">Status</label>
+  <select class="col-sm-9" name="status" [(ngModel)]="target.status">
+    <ng-container *ngFor="let kv of targetStatusMap | keyvalue">
+      <option [ngValue]="kv.key" [selected]="kv.key == target.status ? 'true' : 'false'">{{ kv.value }}</option>
+    </ng-container>
+  </select>
+  <label class="col-sm-3" for="description">Description</label>
+  <input class="col-sm-9" name="description" type="text" [(ngModel)]="target.description" />
 
-    <button (click)="saveTarget()">Save</button>
+  <button class="col-12 btn btn-success btn-block" (click)="saveTarget()">Save</button>
 </form>
