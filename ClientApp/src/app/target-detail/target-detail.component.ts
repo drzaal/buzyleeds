@@ -7,7 +7,7 @@ import { ContactDetailComponent } from '../contact-detail/contact-detail.compone
 
 @Component({
   selector: 'app-target-detail',
-  inputs: ['target', 'focusCallback', 'editCallback', 'deleteCallback'],
+  inputs: ['target', 'refId', 'refListContainer', 'focusCallback', 'editCallback', 'deleteCallback'],
   templateUrl: './target-detail.component.html',
 })
     export class TargetDetailComponent implements OnInit {
@@ -75,7 +75,7 @@ import { ContactDetailComponent } from '../contact-detail/contact-detail.compone
         this.httpClient.delete<void>(this.apiUrl + 'DeleteRecord/' + this.target.id)
           .subscribe(
               () => {
-                  if (this.deleteCallback) this.deleteCallback();
+                  if (this.refListContainer) this.refListContainer.splice(this.refId, 1);
               }, 
               error => console.log(error),
               () => this.target = null
@@ -86,7 +86,7 @@ import { ContactDetailComponent } from '../contact-detail/contact-detail.compone
     {
         if (!this.target.primaryContacts) this.target.primaryContacts = [];
         this.target.primaryContacts.push({ 
-            businessLeadId: this.target.id,
+            leadId: this.target.id,
             personalName: "",
             middleName: "",
             familyName: "",
@@ -100,7 +100,7 @@ import { ContactDetailComponent } from '../contact-detail/contact-detail.compone
     {
         if (!this.target.financialData) this.target.financialData = [];
         this.target.financialData.push({ 
-            businessLeadId: this.target.id,
+            leadId: this.target.id,
             eventDate: new Date(),
             currencyValue: 0
         });

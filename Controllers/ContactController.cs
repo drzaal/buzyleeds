@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using buzyleeds.dbo;
+using Microsoft.EntityFrameworkCore;
 
 namespace buzyleeds.Controllers
 {
@@ -43,8 +44,8 @@ namespace buzyleeds.Controllers
             return db.TargetContacts.Find(id);
         }
 
-        [HttpDelete("[action]")]
-        public void Delete(int id)
+        [HttpDelete("[action]/{id}")]
+        public void DeleteRecord(int id)
         {
             db.TargetContacts.Remove(db.TargetContacts.Find(id));
             db.SaveChanges();
@@ -53,8 +54,15 @@ namespace buzyleeds.Controllers
         [HttpPost("[action]")]
         public TargetContact SaveRecord([FromBody] TargetContact contactData)
         {
+            HttpContext.Response.Headers["Content-Encoding"] = "identity";
+            HttpContext.Response.Headers["Transfer-Encoding"] = "identity";
+
             if (contactData.Id == 0) contactData = db.TargetContacts.Add(contactData).Entity;
             else db.TargetContacts.Update(contactData);
+            var lead = db.BusinessLeads.Where(x => x.Id == contactData.LeadId).Include(x=> x.PrimaryContacts).FirstOrDefault();
+            if (lead == null) throw new System.Exception("Unable to find parent record.");
+
+            lead.PrimaryContacts.Append(contactData);
             db.SaveChanges();
 
             return contactData;

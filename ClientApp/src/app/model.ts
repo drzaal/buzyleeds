@@ -9,7 +9,7 @@ export interface Target {
 
 export interface Contact {
     id?: number;
-    businessLeadId: number;
+    leadId: number;
     personalName: string;
     familyName: string;
     middleName: string;
@@ -21,7 +21,7 @@ export interface Contact {
 export interface Financial
 {
     id?: number;
-    businessLeadId: number;
+    leadId: number;
     eventDate: Date;
     currencyValue: number;
 }

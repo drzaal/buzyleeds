@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using buzyleeds.dbo;
+using Newtonsoft.Json;
 
 namespace buzyleeds
 {
@@ -24,6 +25,10 @@ namespace buzyleeds
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContextPool<TargetContext>( // replace "YourDbContext" with the class name of your DbContext
@@ -58,6 +63,9 @@ namespace buzyleeds
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+
+            app.UseCors("AllowAnyOrigin");
 
             app.UseMvc(routes =>
             {

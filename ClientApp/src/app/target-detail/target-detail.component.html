@@ -12,9 +12,7 @@
         <ng-container *ngFor="let c of target.primaryContacts; let i = index">
           <app-contact-detail [contact]="c"
             [refId]="i"
-            [deleteCallback]="removeContact" 
-            [editCallback]="openEditContact"
-            [focusCallback]="openEditContact">
+            [refListContainer]="target.primaryContacts">
           </app-contact-detail>
         </ng-container>
       </div>

@@ -33,7 +33,9 @@ namespace buzyleeds.dbo
         public string Description { get; set; }
         public TargetStatus? Status { get; set; }
 
+        [ForeignKey("LeadId")]
         public virtual IEnumerable<TargetContact> PrimaryContacts { get; set; }
+        [ForeignKey("LeadId")]
         public virtual IEnumerable<Financial> FinancialData { get; set; }
     }
 
@@ -42,8 +44,8 @@ namespace buzyleeds.dbo
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [ForeignKey("BusinessLead")]
-        public int LeadId;
+        public int LeadId { get; set; }
+        public BusinessLead BusinessLead { get; set; }
         public string PersonalName { get; set; }
         public string FamilyName { get; set; }
         public string MiddleName { get; set; }
@@ -59,8 +61,8 @@ namespace buzyleeds.dbo
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [ForeignKey("BusinessLead")]
-        public int LeadId;
+        public int LeadId { get; set; }
+        public BusinessLead BusinessLead { get; set; }
         public DateTime EventDate;
         public int CurrencyValue;
     }

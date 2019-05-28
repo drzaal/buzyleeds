@@ -5,7 +5,7 @@ import { updateClassProp } from '../../../node_modules/@angular/core/src/render3
 
 @Component({
   selector: 'app-contact-detail',
-  inputs: ['contact', 'refId', 'focusCallback', 'editCallback', 'deleteCallback'],
+  inputs: ['contact', 'refId', 'refListContainer', 'focusCallback', 'editCallback', 'deleteCallback'],
   templateUrl: './contact-detail.component.html',
 })
 export class ContactDetailComponent implements OnInit {
@@ -31,6 +31,7 @@ export class ContactDetailComponent implements OnInit {
     public ngOnInit() {
         console.log(this.contact);
         console.log(this.refId);
+        console.log(this.deleteCallback);
         // start a new record in edit mode
         this.editMode = this.contact.id != null ? false : true;
     }
@@ -41,7 +42,7 @@ export class ContactDetailComponent implements OnInit {
         if (this.editMode && this.editCallback) this.editCallback(this.refId);
     }
 
-    public saveTarget()
+    public saveRecord()
     {
         console.log(this.contact);
         this.httpClient.post<Contact>(
@@ -58,12 +59,12 @@ export class ContactDetailComponent implements OnInit {
           );
     }
 
-    public deleteTarget()
+    public deleteRecord()
     {
         this.httpClient.delete<void>(this.apiUrl + 'DeleteRecord/' + this.contact.id)
           .subscribe(
               () => {
-                  if (this.deleteCallback) this.deleteCallback(this.refId);
+                  if (this.refListContainer) this.refListContainer.splice(this.refId, 1);
               }, 
               error => console.log(error),
               () => this.contact = null

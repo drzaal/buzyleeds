@@ -23,8 +23,10 @@ namespace buzyleeds.Controllers
         [HttpGet("[action]")]
         public IEnumerable<BusinessLead> GetAll()
         {
-            return db.BusinessLeads.Include(x => x.PrimaryContacts)
+            var response = db.BusinessLeads.Include(x => x.PrimaryContacts)
                 .ToList();
+            HttpContext.Response.Headers["Transfer-Encoding"] = "identity";
+            return response;
         }
 
         [HttpGet("[action]")]
