@@ -32,11 +32,8 @@ namespace buzyleeds
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContextPool<TargetContext>( // replace "YourDbContext" with the class name of your DbContext
-                options => options.UseMySql("Server=localhost;Database=busyleed;User=polo;Password=marco;", // replace with your Connection String
-                    mySqlOptions =>
-                    {
-                        mySqlOptions.ServerVersion(new Version(10, 3, 15), ServerType.MariaDb); // replace with your Server Version and Type
-                    }
+                options => options.UseSqlServer(
+                    Configuration.GetConnectionString("LeadsDatabase")
             ));
 
             // In production, the Angular files will be served from this directory
