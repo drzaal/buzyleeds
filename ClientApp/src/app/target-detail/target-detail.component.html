@@ -16,7 +16,7 @@
 
   <h4 [ngClass]="{ 'col-12':true, btn:true, 'btn-info': hideContacts}"
       (click)="hideContacts=!hideContacts">
-    Contacts
+    Contacts<span *ngIf="target.primaryContacts && target.primaryContacts.length > 0"> ({{ target.primaryContacts.length }})</span>
   </h4>
   <div class="offset-sm-2 col-sm-10" *ngIf="!hideContacts">
     <button class="btn btn-info btn-block" (click)="createNewContact()">Add Contact</button>
