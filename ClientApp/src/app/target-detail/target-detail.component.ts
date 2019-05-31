@@ -77,6 +77,16 @@ import { ContactDetailComponent } from '../contact-detail/contact-detail.compone
           );
     }
 
+    public cancelEdit()
+    {
+        this.editMode = false;
+        if (this.editCallback) this.editCallback(this.refId);
+        if (this.target.id == null) {
+          this.target = null;
+          if (this.refListContainer) this.refListContainer.splice(this.refId, 1);
+        }
+    }
+
     public deleteTarget()
     {
         this.httpClient.delete<void>(this.apiUrl + 'DeleteRecord/' + this.target.id)

@@ -22,5 +22,6 @@
   <label for="email" class="col-sm-3">Email</label>
   <input name="email" class="col-sm-9" type="text" [(ngModel)]="contact.email" />
 
-  <button class="btn btn-success btn-block" (click)="saveRecord()">Save</button>
+  <button class="btn btn-success col-7" (click)="saveRecord()">Save</button>
+  <button class="btn btn-light col-5" (click)="cancelEdit()">Cancel</button>
 </form>

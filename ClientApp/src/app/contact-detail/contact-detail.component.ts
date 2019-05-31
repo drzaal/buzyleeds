@@ -60,6 +60,16 @@ export class ContactDetailComponent implements OnInit {
         this.editMode = false;
     }
 
+    public cancelEdit()
+    {
+        this.editMode = false;
+        if (this.editCallback) this.editCallback(this.refId);
+        if (this.contact.id == null) {
+          if (this.refListContainer) this.refListContainer.splice(this.refId, 1);
+          this.contact = null;
+        }
+    }
+
     public deleteRecord()
     {
         this.httpClient.delete<void>(this.apiUrl + 'DeleteRecord/' + this.contact.id)

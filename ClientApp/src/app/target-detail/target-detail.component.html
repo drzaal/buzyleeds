@@ -42,5 +42,6 @@
   <label class="col-sm-3" for="description">Description</label>
   <input class="col-sm-9" name="description" type="text" [(ngModel)]="target.description" />
 
-  <button class="col-12 btn btn-success btn-block" (click)="saveTarget()">Save</button>
+  <button class="col-7 btn btn-success" (click)="saveTarget()">Save</button>
+  <button class="col-5 btn btn-light" (click)="cancelEdit()">Cancel</button>
 </form>
