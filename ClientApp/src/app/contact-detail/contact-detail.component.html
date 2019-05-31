@@ -1,9 +1,7 @@
 
-<div *ngIf="!editMode" class="row">
-  <div class="col-sm">{{ contact.familyName }}</div>
-  <div class="col-sm">{{ contact.personalName }}</div>
-  <div class="col-sm">{{ contact.phone }}</div>
-  <div class="col-sm">{{ contact.email }}</div>
+<div *ngIf="!editMode" class="row rounded border border-2 border-light">
+  <div class="col">{{ displayName() }}</div>
+  <div class="col">Contact: {{ contact.phone }} | {{contact.email }}</div>
   <div class="col-xs-6 col-sm-2 align-self-center">
     <button (click)="toggleEdit()" class="btn btn-sm btn-block btn-success">Edit</button>
   </div>
@@ -12,7 +10,7 @@
   </div>
 </div>
 
-<form *ngIf="editMode" class="row">
+<form *ngIf="editMode" class="row rounded border border-2 border-light">
   <input name="id" type="hidden" [(ngModel)]="contact.id" />
   <input name="leadId" type="hidden" [(ngModel)]="contact.leadId" />
   <label for="familyName" class="col-sm-3">Family Name</label>

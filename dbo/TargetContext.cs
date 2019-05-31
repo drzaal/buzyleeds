@@ -3,10 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace buzyleeds.dbo
 {
     // Only use an enum if there are business rules associated with a status
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum TargetStatus { RESEARCHING, PENDING, APPROVED, DECLINED }
 
     public class TargetContext : DbContext
@@ -32,7 +35,6 @@ namespace buzyleeds.dbo
         public string Name { get; set; }
         public string Description { get; set; }
         public TargetStatus? Status { get; set; }
-
         [ForeignKey("LeadId")]
         public virtual IEnumerable<TargetContact> PrimaryContacts { get; set; }
         [ForeignKey("LeadId")]

@@ -45,7 +45,7 @@ import { ContactDetailComponent } from '../contact-detail/contact-detail.compone
     }
 
     public ngOnInit() {
-        console.log(this.target);
+        this.hideContacts = true;
         if (this.target && this.target.id == null) this.editMode = true;
     }
 

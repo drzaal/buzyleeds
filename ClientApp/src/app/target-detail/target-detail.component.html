@@ -1,28 +1,32 @@
-<div *ngIf="!editMode" class="row">
-  <div class="col-sm-8 row">
-    <h3 class="col-12">{{ target.name }}</h3>
-    <div class="col-12">Status: {{ targetStatusMap[target.status] }}</div>
-    <div class="col-12">{{ target.description }}</div>
-    <h4 [ngClass]="{ 'col-12':true, btn:true, 'btn-info': hideContacts}"
-        (click)="hideContacts=!hideContacts">
-      Contacts
-    </h4>
-    <div class="col-12" *ngIf="!hideContacts">
-      <button class="btn btn-info btn-block" (click)="createNewContact()">Add Contact</button>
-      <ng-container *ngFor="let c of target.primaryContacts; let i = index">
-        <app-contact-detail [contact]="c"
-                            [refId]="i"
-                            [refListContainer]="target.primaryContacts">
-        </app-contact-detail>
-      </ng-container>
+<div *ngIf="!editMode">
+  <div class="row rounded border border-2 border-light">
+    <div class="col-sm-8 row">
+      <h3 class="col-12">{{ target.name }}</h3>
+      <div class="col-12">Status: {{ targetStatusMap[target.status] }}</div>
+      <div class="col-12">{{ target.description }}</div>
+
     </div>
-  </div>
     <div class="col-xs-6 col-sm-2 align-self-center">
       <button (click)="toggleEdit()" class="btn btn-sm btn-block btn-success">Edit</button>
     </div>
     <div class="col-xs-6 col-sm-2 align-self-center">
       <button (click)="deleteTarget()" class="btn btn-sm btn-block btn-danger">Delete</button>
     </div>
+  </div>
+
+  <h4 [ngClass]="{ 'col-12':true, btn:true, 'btn-info': hideContacts}"
+      (click)="hideContacts=!hideContacts">
+    Contacts
+  </h4>
+  <div class="offset-sm-2 col-sm-10" *ngIf="!hideContacts">
+    <button class="btn btn-info btn-block" (click)="createNewContact()">Add Contact</button>
+    <ng-container *ngFor="let c of target.primaryContacts; let i = index">
+      <app-contact-detail [contact]="c"
+                          [refId]="i"
+                          [refListContainer]="target.primaryContacts">
+      </app-contact-detail>
+    </ng-container>
+  </div>
 </div>
 
 <form *ngIf="editMode">

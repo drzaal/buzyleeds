@@ -51,9 +51,16 @@ namespace buzyleeds.Controllers
         [HttpPost("[action]")]
         public BusinessLead SaveRecord([FromBody] BusinessLead leadData)
         {
-            if (leadData.Id == 0) leadData = db.BusinessLeads.Add(leadData).Entity;
-            else db.BusinessLeads.Update(leadData);
-            db.SaveChanges();
+            try
+            {
+                if (leadData.Id == 0) leadData = db.BusinessLeads.Add(leadData).Entity;
+                else db.BusinessLeads.Update(leadData);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             return leadData;
         }

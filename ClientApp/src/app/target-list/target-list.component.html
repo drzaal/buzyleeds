@@ -5,8 +5,8 @@
 
 <button class="btn btn-block btn-info" (click)="createNewTarget()">Create a new Target</button>
 <br/>
-<ul class='table table-striped' *ngIf="targets">
-    <li *ngFor="let t of targets; let i = index">
+<div class='table table-striped' *ngIf="targets">
+    <div *ngFor="let t of targets; let i = index">
         <app-target-detail [target]="t" [refId]="i" [refListContainer]="targets"></app-target-detail>
-    </li>
-</ul>
+    </div>
+</div>

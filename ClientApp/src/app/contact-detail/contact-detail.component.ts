@@ -55,8 +55,9 @@ export class ContactDetailComponent implements OnInit {
                   if (this.editCallback) this.editCallback(this.refId);
               }, 
               error => console.log(error),
-              () => { this.editMode = false; }
-          );
+              () => {  }
+            );
+        this.editMode = false;
     }
 
     public deleteRecord()
@@ -69,6 +70,31 @@ export class ContactDetailComponent implements OnInit {
               error => console.log(error),
               () => this.contact = null
           );
+    }
+
+    public displayName()
+    {
+        let out = "";
+        if (this.contact.familyName && this.contact.personalName)
+        {
+            out = this.contact.familyName + ', ' + this.contact.personalName;
+        }
+        else
+        {
+            out = this.contact.familyName || this.contact.personalName || "";
+        }
+        if (out) out += " " + (this.contact.middleName || "");
+        else out = this.contact.middleName;
+        return out;
+    }
+
+    public displayComms()
+    {
+        if (this.contact.phone && this.contact.email)
+        {
+            return [this.contact.phone, this.contact.email].join(" | ");
+        }
+        return this.contact.phone || this.contact.email || "";
     }
 
     public find(id : number)
